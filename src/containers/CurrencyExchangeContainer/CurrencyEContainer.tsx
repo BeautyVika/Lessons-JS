@@ -85,23 +85,26 @@ const mapStateToProps = ( { currency } : {currency: CurrencyState} ): CurrencySt
         amountOfCurrency: currency.amountOfCurrency,
     };
 };
+type MapDispatchToPropsType = {
+    setCurrencyAmount: (amountOfBYN: string, amountOfCurrency: string) => void
+    setAction: (isBuying: boolean) => void
+    changeCurrency: (currency: string) => void
+}
 
-// @ts-ignore
-const mapDispatchToProps = (dispatch: Dispatch<CurrencyReducersTypes>) : any => {
+const mapDispatchToProps = (dispatch: Dispatch<CurrencyReducersTypes>) : MapDispatchToPropsType => {
     return {
-        setCurrencyAmount(amountOfBYN: string, amountOfCurrency: string) {
+        setCurrencyAmount: (amountOfBYN: string, amountOfCurrency: string) => {
             dispatch(ChangeCurrencyFieldAC(amountOfBYN, amountOfCurrency));
         },
-        setAction(isBuying: boolean) {
+        setAction: (isBuying: boolean) => {
             dispatch(ChangeActionAC(isBuying));
         },
-        changeCurrency(currency: string) {
+        changeCurrency: (currency: string) => {
             dispatch(СhangeCurrentCurrencyAC(currency));
         },
     };
 };
 
-// @ts-ignore
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type TProps = ConnectedProps<typeof connector>;
